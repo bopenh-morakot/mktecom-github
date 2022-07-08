@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="RAFCART - Multipurpose eCommerce HTML Template">
     <meta name="author" content="Programming Kit">
+    <meta name="google-signin-client_id" content="301599263335-1l86q2gse7vm3miu5bp9tuept62iragg.apps.googleusercontent.com">
     <title>RAFCART - Multipurpose eCommerce HTML Template</title>
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
 
@@ -18,6 +19,178 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
+
+<style>
+    input.otp{
+  display:inline-block;
+  width:50px;
+  height:50px;
+  text-align:center;
+}
+
+.input_validate_true{
+    border-color: #7ac142 !important;
+}
+
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: #7ac142;
+  fill: none;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark {
+    display:inline-block;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  /* display: block; */
+  stroke-width: 2;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  margin: 10% auto;
+  box-shadow: inset 0px 0px 0px #7ac142;
+  animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+}
+
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes scale {
+  0%, 100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #7ac142;
+  }
+}
+/* .svg-icon-success, */
+.svg-icon-error {
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+  /* position: absolute; */
+  top: 50%;
+  left: 40%;
+  margin: -25px 0 0 -25px;
+  opacity: 0;
+  transform: translate3d(0, -3000px, 0);
+}
+
+.svg-icon-error {
+  left: initial;
+  right: 40%;
+  margin: -25px -25px 0 0;
+}
+
+/* .svg-icon-success .circle-check {
+  fill: none;
+  fill-opacity: 0;
+  stroke: #fff;
+  stroke-width: 4px;
+  stroke-location: inside;
+  stroke-dasharray: 0 100;
+} */
+
+
+.svg-icon-error.is-animated {
+  animation-name: bounceInDown;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+/* .svg-icon-success.is-animated .circle-check {
+  animation-name: dasharray;
+  animation-duration: 0.5s;
+  animation-delay: 0.3s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+} */
+
+.svg-icon-error.is-animated .x-single {
+  animation-name: rotate;
+  animation-duration: 0.5s;
+  animation-delay: 0.3s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+  transform-origin: 50% 50%;
+}
+
+/**
+ * Animations
+ */
+
+/**
+ * @source animate.css - bounceInDown
+ */
+@keyframes bounceInDown {
+  from, 60%, 75%, 90%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -3000px, 0);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translate3d(0, 25px, 0);
+  }
+
+  75% {
+    transform: translate3d(0, -10px, 0);
+  }
+
+  90% {
+    transform: translate3d(0, 5px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes dasharray {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+
+  100% {
+    stroke-dasharray: 100 0;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(315deg);
+  }
+}
+</style>
+
+
 
 <body>
 
@@ -1185,13 +1358,45 @@
                             <span class="txt">Or singup in with</span>
                         </div>
                         <!-- social register  -->
-                        <div class="d-flex">
-                            <button class="default_btn xs_btn rounded px-4 d-block w-50 text-capitalize bg-facebook">
-                                <i class="fab fa-facebook-f me-2"></i> Facebook
-                            </button>
-                            <button class="default_btn xs_btn rounded px-4 d-block w-50 ms-3 text-capitalize bg-google">
-                                <i class="fab fa-google me-2"></i> Google
-                            </button>
+                        <div class="col-12 mt-3 btn-active">
+                            <!-- Sign in with google -->
+                            <div style=" display: flex;
+                                          flex-direction: row;
+                                          flex-wrap: wrap;
+                                          width: 100%;">
+                                <div style="display: flex;
+                                              flex-direction: column;
+                                              flex-basis: 100%;
+                                              flex: 1;">
+                                                  
+                                    <div id="google-button"></div>            
+                                </div>
+                                <div style="display: flex;
+                                              flex-direction: column;
+                                              flex-basis: 100%;
+                                              flex: 0;
+                                              padding: 0px;
+                                              background-color: #1977f2;
+                                              border-radius: 5px;">
+                                                  
+                                    <!-- Sign in with factbook -->
+                                    <div style="margin: auto;
+                                              ">
+                                        <fb:login-button
+                                        scope="public_profile,email,user_birthday,user_friends,user_posts,user_likes"
+                                        width="200"
+                                        size="medium"
+                                        button-type="continue_with"
+                                        layout="default"
+                                        continue-as="true"
+                                        onlogin="checkLoginState();">
+                                        <br>
+                                    </fb:login-button>
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </div>
 
                         <p class="text-center mt-3 mb-0">Already have an account.? <a href="login.html" class="text-color">Login Now</a></p>
@@ -1318,6 +1523,549 @@
     <script src="assets/js/slick.min.js"></script>
     <script src="assets/js/jquery.nice-select.min.js"></script>
     <script src="assets/js/app.js"></script>
+    <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <script>
+        $(document).ready(function(){
+            // Script for facebook login
+            (function(d, s, id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {return;}
+                js = d.createElement(s); js.id = id;
+                js.src = "https://connect.facebook.net/en_GB/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'facebook-jssdk'));
+    
+              function checkLoginState() {
+                FB.getLoginStatus(function(response) {
+                console.log('------------> response ', response)
+                console.log('------------> response.status', response.status)
+                  if (response.status === 'connected') {
+                    var accessToken = response.authResponse.accessToken;
+    
+                    profile_url = 'https://graph.facebook.com/v6.0/me/?access_token=' + accessToken + '&fields=id,name,email,first_name,last_name'
+                    console.log('---------> profile_url',profile_url)
+                    $.ajax({
+                        type: 'GET',
+                        url: profile_url,
+                        dataType: "json",
+                        success: function (data) {
+                            console.log('here is data with facebook=========================\n' +
+                                data +
+                                '\n====================================')
+                            alert('Hold on .... !')
+                            if (data.id){
+                                LogInName = (data.id).toString()
+                                Type = 'Facebook'
+                                FirstName = data.first_name
+                                LastName = data.last_name
+                                Email = ''
+                                Profile = ''
+                                SignInWithSocial(LogInName, Type, FirstName, LastName, Email, Profile)
+                            }
+                            return data
+                        }
+    
+                    });
+    
+                  }
+                } );
+              }
+    
+              window.fbAsyncInit = function() {
+                FB.init({
+                  appId      : '2788104778163508',
+                  cookie     : true,
+                  xfbml      : true,
+                  version    : 'v6.0'
+                });
+                FB.AppEvents.logPageView();
+                checkLoginState()
+              };
+    
+    
+            // script for google login
+            var googleButton = document.getElementById('google-button');
+            var container = document.getElementsByClassName('container')[0];
+            var img = document.getElementsByClassName('img')[0];
+            var getName = document.getElementsByClassName('name')[0];
+            console.log('get google account name::: ', getName)
+            var id = document.getElementsByClassName('id')[0];
+            var email = document.getElementsByClassName('email')[0];
+    
+            // function to get response
+            function handleCredentialResponse(response) {
+                console.log(response)
+                const responsePayload = decodeJwtResponse(response.credential);
+                var LogInName = responsePayload.sub;
+                var Type = 'Google'
+                var FirstName = responsePayload.given_name;
+                var LastName = responsePayload.family_name;
+                var Email = responsePayload.email;
+                var Profile = responsePayload.picture;
+                var Name = responsePayload.name;
+    
+                document.getElementById("LogInName").setAttribute('value', LogInName.toString());
+                document.getElementById("ProfileUrl").setAttribute('value', Profile.toString());
+    
+    
+                SignInWithSocial(LogInName, Type, FirstName, LastName, Email, Profile)
+    
+    
+                console.log(responsePayload)
+    
+                console.log('Profile:: ', Profile)
+                console.log('Name:: ', Name)
+                console.log('FirstName:: ', FirstName)
+                console.log('LastName:: ', LastName)
+                console.log('email:: ', email)
+    
+            }
+    
+            window.onload = function () {
+                google.accounts.id.initialize({
+                    // replace your client id below
+                    client_id: "301599263335-1l86q2gse7vm3miu5bp9tuept62iragg.apps.googleusercontent.com",
+                    callback: handleCredentialResponse,
+                    auto_select: true,
+                    auto: true
+                });
+    
+                google.accounts.id.renderButton(
+                    document.getElementById("google-button"),
+                    { theme: "filled_blue", size: "medium", width: '100%', text: "continue_with" }  // customization attributes
+                );
+                // also display the One Tap dialog on right side
+                // important for auto login
+                google.accounts.id.prompt(); 
+            }
+    
+            // function to decode the response.credential
+            function decodeJwtResponse(token) {
+                var base64Url = token.split('.')[1];
+                var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+                return JSON.parse(jsonPayload);
+            }
+    
+            function signOut() {
+                google.accounts.id.disableAutoSelect();
+                // do anything on logout
+                location.reload();
+            }
+            
+            function SignInWithSocial(LogInName, Type, FirstName, LastName, Email, Profile) {
+                console.log('LogInName::', LogInName)
+                console.log('Type::', Type)
+                console.log('FirstName::', FirstName)
+                console.log('LastName::', LastName)
+                console.log('Profile::', Profile)
+                $.ajax({
+                    type: 'POST',
+                    url: "/API/EcomerceAccount/SignInWithSocial/",
+                    data: {
+                        'LogInName': LogInName,
+                        'Type': Type,
+                        'FirstName': FirstName,
+                        'LastName': LastName,
+                        'Profile': Profile,
+                        'Email': Email
+                    },
+                    dataType: "json",
+                    beforeSend: function () {
+                        $('.btn-submit').html('<i class="fas fa-spinner fa-spin"></i>');
+                        $('.btn-submit').prop('disabled', true);
+                    },
+                    success: function (data) {
+    
+                        var data_res = data.data;
+                        console.log('\nCheck data after request SignInWith Social account', data_res, '\n\n')
+                        if (data_res[0]) {
+                            $('.svg-icon-error').removeClass('is-animated');
+                            $('.checkmark').show();
+                            $('.otp').css("border-color", "#7ac142");
+    
+                            setTimeout(() => {
+                                $('.otp-box-4').attr('readonly', 'true');
+                                $('.btn-back').hide();
+                            }, 100);
+                            console.log('data_res[1].IsExist::::', data_res[1].IsExist, 'hi hi')
+                            // alert('check data before condition', data_res[1].IsExist.toString())
+                            if (data_res[1].IsExist) {
+                                console.log('get into verify TRUE')
+                                window.location.href = '/';
+                            } else {
+                                console.log('IsExist False:::: {}', data_res)
+                                document.getElementById("SignUpID").setAttribute('value', data_res[1].SignUpID.toString());
+                                if (data_res[1].Status){
+                                    window.location.href = '/';
+                                }
+    
+    
+    
+    
+    
+    
+    
+                                // alert('wait wait . . .')
+                                // $('.box-register-name').animate({
+                                //     height: 'show'
+                                // });
+                                // alert('hi')
+                                // $('.btn-active').prepend('<button type="submit" value="0" class="default_btn xs_btn rounded px-4 d-block w-100 btn-register">Create Account</button>');
+                                // alert('here we go already Register')
+                                // $('.btn-submit').removeClass('d-block');
+                                // $('.btn-submit').hide();
+    
+                            }
+                        } else {
+    
+                            $('.svg-icon-error').addClass('is-animated');
+                            $('.otp').css("border-color", "red");
+                            $('.btn-submit').html('Re-Send');
+                            $('.btn-submit').prop('disabled', false);
+    
+                        }
+    
+    
+                    },
+    
+                });
+    
+            }
+    
+            var SignUpID = "";
+            var OTPID = "";
+            var LogInName = "";
+            var Type = "";
+            var MobilePrefix = "+855";
+            var LoginNameBoolen = "";
+            $('.otp-box').hide();
+            $('.signupinfo').hide();
+            $('.otp-box-4').hide();
+            $('.checkmark').hide();
+            $('.password-box').hide();
+            $('.box-register-name').hide();
+            $('.btn-back').hide();
+            $('.btn-submit').attr('disabled','disabled');
+            $('.btn-submit').css('opacity','0.5');
+            
+            $('body').on('click','.btn-back',function(){
+                var value = $('.btn-back');
+                if (value.val()=='OTP'){
+                    setTimeout(() => {
+                        $('.box-input-username').show();
+                    }, 200);
+                    $('.otp-box-4').animate({
+                        height: 'hide'
+                    }); 
+                    $('.btn-back').animate({
+                        height: 'hide'
+                    }); 
+                    $('.box-input-username').removeClass('animate__animated animate__fadeOutLeft');
+                    $('.box-input-username').addClass('animate__animated animate__fadeInRight');
+    
+                    $('#OTP').val('');
+                    $('#otp1').val('');
+                    $('#otp2').val('');
+                    $('#otp3').val('');
+                    $('#otp4').val('');
+    
+                    $('.box-register-name').animate({
+                            height: 'hide'
+                    }); 
+    
+                    $('.btn-register').remove();
+                    $('.btn-submit').addClass('d-block');
+                    $('.btn-submit').show();
+                    $('.btn-submit').attr('disabled','disabled');
+                    $('.btn-submit').css('opacity','0.5');
+                    $('.btn-submit').text('Next');
+    
+                }
+                return false;
+            });
+    
+            $('body').on('click','.btn-submit',function(){
+                
+                LogInName = $('#LogInName');
+    
+                if (LogInName.val() == ""){
+                    alert('Enter email');
+                    return false;
+                }
+                if (LoginNameBoolen == false){
+                    return false
+                }
+    
+                $.ajax({
+                    type: 'POST',
+                    url: "/API/EcomerceAccount/SignUpJoinUs/",
+                    data: {LogInName:LogInName.val(),Type:Type,MobilePrefix:MobilePrefix},
+                    dataType: "json",
+                    beforeSend:function(data){
+                    $('.btn-submit').html('<i class="fas fa-spinner fa-spin"></i>');
+                    $('.btn-submit').prop('disabled', true);
+                    },
+                    success:function(data){
+                        var result = data.data;
+                        if(Boolean(result[0])){
+                            SignUpID = result[1].SignUpID;
+                            OTPID   = result[1].OTPID;
+                        }
+                        $('.btn-submit').html('Re-Send');
+                        $('.btn-submit').prop('disabled', false);
+                    },
+                    error:function(data){
+                        // console.error("Error -" ,data);
+                    }
+                })
+    
+    
+    
+                $('.box-input-username').addClass('animate__animated animate__fadeOutLeft');
+                setTimeout(() => {
+                    $('.box-input-username').hide();
+                            }, 200);
+                $('.otp-box-4').animate({
+                            height: 'show'
+                            }); 
+                $('.btn-back').animate({
+                            height: 'show'
+                            }); 
+                $('.btn-back').val('OTP')
+                
+                return false;
+                
+            });
+    
+            $('body').on('click','.btn-register',function(){
+                var FirstName = $('#FirstName').val();
+                var LastName = $('#LastName').val();
+                var LogInName = $('#LogInName').val();
+                var Profile = $('#ProfileUrl').val();
+                var SignUpID = $('#SignUpID').val();
+                if(FirstName==""){
+                    return false;
+                }
+                if(LastName==""){
+                    return false;
+                }
+                // var url = form.attr('action'); //get submit url [replace url here if desired]
+                //alert('go into ajax ......', url)
+                $.ajax({
+                    type: 'POST',
+                    url: "/API/EcomerceAccount/RegisterNewCustomer/",
+                    data: {SignUpID:SignUpID,FirstName:FirstName,LastName:LastName,LogInName:LogInName, Profile:Profile},
+                    dataType: "json",
+                    beforeSend:function(data){
+                    $('.btn-register').html('<i class="fas fa-spinner fa-spin"></i>');
+                    $('.btn-register').prop('disabled', true);
+                    },
+                    error: function (request, status, error){
+                        $("#success").html("Oops! Something went wrong. Please try again");
+                    },
+                    success:function(data){
+                        var result = data.data;
+                        if (result[1].StatusCode == 200){
+                            window.location.href = '/';
+                        }
+    
+                    }
+                });
+                console.log('hi.....')
+                return false;
+            });
+    
+            // vertifyOTP
+            $('body').on('keyup','#otp4',function(){
+                var OTP       = $('#OTP').val();
+                if(OTP.length==4){
+                    $.ajax({
+                    type: 'POST',
+                    url: "/API/EcomerceAccount/getVertifyJoinUsOTP/",
+                    data: {'SignUpID':SignUpID,'OTPID':OTPID,'OTP':OTP,'LogInName':LogInName.val()},
+                    dataType: "json",
+                    beforeSend:function(){
+                        $('.btn-submit').html('<i class="fas fa-spinner fa-spin"></i>');
+                        $('.btn-submit').prop('disabled', true);
+                    },
+                    success:function(data){
+                        
+                        var data_res = data.data;
+                        if (data_res[1].Verify){
+                                $('.svg-icon-error').removeClass('is-animated');
+                                $('.checkmark').show();
+                                $('.otp').css("border-color","#7ac142");
+                                document.getElementById('response-message').innerHTML = '';
+                                
+                                setTimeout(() => {
+                                    $('.otp-box-4').attr('readonly', 'true');
+                                    $('.btn-back').hide();
+                                    }, 100);
+                                if(data_res[1].IsValid){
+                                    window.location.href = '/';
+                                }else{
+                                    
+                                    $('.box-register-name').animate({
+                                        height: 'show'
+                                    }); 
+                                    $('.btn-active').prepend('<button type="submit" value="0" class="default_btn xs_btn rounded px-4 d-block w-100 btn-register">Create Account</button>');
+                                    $('.btn-submit').removeClass('d-block');
+                                    $('.btn-submit').hide();
+                                   
+                                }
+                        }else { 
+                            
+                            $('.svg-icon-error').addClass('is-animated');
+                            $('.otp').css("border-color","red");
+                            $('.btn-submit').html('Re-Send');
+                            $('.btn-submit').prop('disabled', false);
+                            DataResponse = data.data[1]
+                            ResponseMessage = DataResponse.Message
+                            document.getElementById('response-message').innerHTML = ResponseMessage;
+                            console.log('data after request data :: ', data.data[1])
+                            alert('check data in console please')
+                            }
+    
+                        
+    
+                    },          
+                
+                });
+                }
+                
+    
+    
+               
+                
+            });
+    
+            $('body').on('keyup','#LogInName',function(){
+                var value = $(this).val();
+                var isvalidateEmail = validateEmail(value);
+                var isvalidateMobile = validateOnlyNumbers(value);
+                //console.log(isvalidateMobile);
+                if(Boolean(isvalidateEmail)){
+                    vertifyTrueInput();
+                    Type="Email";
+                    LoginNameBoolen = true;
+                }else if(Boolean(isvalidateMobile)) {
+                    vertifyTrueInput();
+                    Type="Mobile";
+                    LoginNameBoolen = true;
+                }else{
+                    vertifyFalseInput();
+                    LoginNameBoolen = false;
+                }
+    
+            });
+        });
+    
+    // function onSignIn(googleUser){
+    //     alert('helllo')
+    //     console.log('--------------> googleUser', googleUser)
+    //     const googleJWT = googleUser.getAuthResponse().id_token;  
+    //     var profile = googleUser.getBasicProfile();
+    //     // var BasicProfile = GoogleUser.getBasicProfile();
+    //     var id = profile.getId()
+    //     console.log('--------------> profile', profile)
+    //     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    //     console.log('Name: ' + profile.getName());
+    //     console.log('Image URL: ' + profile.getImageUrl());
+    //     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    
+    //     $('#name').text(profile.getName());
+    //     $('#email').text(profile.getEmail());
+    //     $('#image').attr('src',profile.getImageUrl());
+    //     $('.data').css('display','block');
+    //     $('.g-signin2').css('display','none');
+    
+    //     return id    
+    
+    // }
+    function getGoogleBasicProfile() {
+    // auth2 is initialized with gapi.auth2.init() and a user is signed in.
+        if (auth2.isSignedIn.get()) {
+            console.log('>>> checking data google profile ....')
+            var profile = auth2.currentUser.get().getBasicProfile();
+            console.log('\nGoogle Object Request :: ', profile)
+            console.log('ID: ' + profile.getId());
+            console.log('Full Name: ' + profile.getName());
+            console.log('Given Name: ' + profile.getGivenName());
+            console.log('Family Name: ' + profile.getFamilyName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail());
+            console.log('funct getbasicprofile called: ');  
+            document.getElementById("name").value = profile.getEmail(); 
+        }
+    }
+    
+    
+    function vertifyTrueInput(){
+        $('#LogInName').addClass('input_validate_true');
+        $('.btn-submit').removeAttr('disabled');
+        $('.btn-submit').css('opacity','1');
+    }
+    
+    function vertifyFalseInput(){
+        $('#LogInName').removeClass('input_validate_true');
+                    $('.btn-submit').attr('disabled');
+                    $('.btn-submit').css('opacity','0.5');
+    }
+    
+    // Validate Mobile or Email
+    
+    function validateEmail(email) {
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+    
+    function validateOnlyNumbers(phone) {
+        var phone = phone.replace('+','');
+        var re = /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/;
+        if(phone.length>=9){
+            return re.test(phone);
+        }else{
+            return false;
+        }
+        
+    }
+    
+    
+    
+        // OTP Box
+        function digitValidate(ele){
+            ele.value = ele.value.replace(/[^0-9]/g,'');
+            getOTPInput();
+        }
+    
+        function tabChange(val){
+            let ele = document.querySelectorAll('input.otp');
+            if(ele[val-1].value != ''){
+                ele[val].focus()
+            }else if(ele[val-1].value == ''){
+                ele[val-2].focus()
+            }   
+            getOTPInput();
+        }
+        function getOTPInput(){
+            var otp1 = document.getElementById('otp1');
+            var otp2 = document.getElementById('otp2');
+            var otp3 = document.getElementById('otp3');
+            var otp4 = document.getElementById('otp4');
+    
+            var otpVal = otp1.value + otp2.value + otp3.value + otp4.value ;
+            document.getElementById('OTP').value = otpVal;
+    
+        }
+    
+    </script>
+    
+    
 </body>
 
 </html>
